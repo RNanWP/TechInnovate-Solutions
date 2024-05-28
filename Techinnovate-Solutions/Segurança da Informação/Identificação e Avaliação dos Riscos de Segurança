@@ -1,0 +1,54 @@
+20 possíveis ameaças/vulnerabilidades:
+
+    Acesso não autorizado
+    Phishing
+    Malware
+    Ataques DDoS
+    Injeção de SQL
+    Ransomware
+    Vazamento de dados
+    Engenharia social
+    Falha de hardware
+    Falha de software
+    Perda de dados
+    Ataques internos
+    Exploração de vulnerabilidades
+    Senhas fracas
+    Roubo de identidade
+    Falta de backups
+    Acessos físicos não autorizados
+    Falha na configuração de segurança
+    Redes Wi-Fi inseguras
+    Falhas de atualização de software
+
+Outros Parâmetros
+
+    Segurança:
+
+        Implementar políticas de segurança de rede (firewalls, anti-vírus).
+        Controle de acesso baseado em função (RBAC) para todos os sistemas.
+        Encriptação de dados sensíveis em trânsito e em repouso.
+
+    Backup e Recuperação:
+
+        Sistema de backup diário automatizado.
+        Armazenamento em nuvem para redundância.
+        Plano de recuperação de desastres (DRP).
+
+    Suporte e Manutenção:
+
+        Contrato de suporte com fornecedores de TI.
+        Equipe de suporte interna para manutenção de hardware e software.
+        Monitoramento contínuo de sistemas e rede.
+
+    Escalabilidade:
+
+        Infraestrutura de TI preparada para escalabilidade.
+        Uso de tecnologias de virtualização.
+        Plano de expansão de rede para suportar crescimento.
+
+    Treinamento:
+
+        Programa de treinamento contínuo para funcionários em novas tecnologias e procedimentos.
+        Sessões de atualização de segurança cibernética.
+        Workshops sobre o uso eficiente dos sistemas de ERP e previsão de demanda.

@@ -1,0 +1,68 @@
+import tkinter as tk
+from tkinter import ttk
+import pandas as pd
+from sqlalchemy import create_engine
+
+def exibir_tabela(tabela):
+    # Conexão com o banco de dados usando SQLAlchemy
+    engine = create_engine('mysql+mysqlconnector://root:root@localhost/techinnovate-solutions')
+    
+    # Consulta SQL para selecionar todos os registros da tabela
+    consulta = f"SELECT * FROM {tabela}"
+    
+    # Carregando dados da tabela
+    dados = pd.read_sql(consulta, engine)
+    
+    # Fechando a conexão
+    engine.dispose()
+    
+    # Criando uma nova janela para exibir os dados
+    janela_tabela = tk.Toplevel(root)
+    janela_tabela.title(f"Tabela {tabela.capitalize()}")
+    
+    # Estilo da árvore
+    style = ttk.Style()
+    style.configure("Treeview.Heading", font=("Helvetica", 12, "bold"))
+    style.configure("Treeview", font=("Helvetica", 10))
+    
+    # Criando uma árvore para exibir os dados
+    tree = ttk.Treeview(janela_tabela, style="Treeview")
+    
+    # Configurando as colunas da árvore
+    tree["columns"] = dados.columns.tolist()
+    for coluna in dados.columns:
+        tree.heading(coluna, text=coluna)
+    
+    # Inserindo os dados na árvore
+    for indice, linha in dados.iterrows():
+        tree.insert("", "end", values=tuple(linha))
+    
+    # Empacotando a árvore na janela
+    tree.pack(expand=True, fill="both")
+
+# Criando a janela principal
+root = tk.Tk()
+root.title("Exibição de Tabelas")
+
+# Estilo dos botões
+style_btn = ttk.Style()
+style_btn.configure("TButton", font=("Helvetica", 12), padding=7)
+
+# Criando botões para exibir cada tabela
+btn_clientes = ttk.Button(root, text="Clientes", command=lambda: exibir_tabela("clientes"))
+btn_clientes.pack(pady=5)
+
+btn_estoque = ttk.Button(root, text="Estoque", command=lambda: exibir_tabela("estoque"))
+btn_estoque.pack(pady=5)
+
+btn_fornecedores = ttk.Button(root, text="Fornecedores", command=lambda: exibir_tabela("fornecedores"))
+btn_fornecedores.pack(pady=5)
+
+btn_produtos = ttk.Button(root, text="Produtos", command=lambda: exibir_tabela("produtos"))
+btn_produtos.pack(pady=5)
+
+btn_venda = ttk.Button(root, text="Vendas", command=lambda: exibir_tabela("vendas"))
+btn_venda.pack(pady=5)
+
+# Loop principal da aplicação
+root.mainloop()

@@ -1,0 +1,12 @@
+10 Políticas de Controle de Acessos:
+
+    Uso de autenticação multifator (MFA)
+    Políticas de senhas fortes e expiração regular
+    Restrição de acesso baseado em função (RBAC)
+    Monitoramento e registro de acessos
+    Criptografia de dados sensíveis
+    Implementação de firewalls e IDS/IPS
+    Segmentação de rede
+    Treinamento regular de conscientização de segurança
+    Políticas de BYOD (Bring Your Own Device)
+    Atualizações e patches regulares de sistemas
