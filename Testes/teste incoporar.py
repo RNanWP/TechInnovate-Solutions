@@ -1,8 +1,3 @@
-# Importando bibliotecas necessárias
-import matplotlib.pyplot as plt
-import seaborn as sns
-from statsmodels.api import OLS
-from sklearn.linear_model import LinearRegression
 import pandas as pd
 from sqlalchemy import create_engine, text
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -14,6 +9,7 @@ from tkinter import scrolledtext
 from faker import Faker
 from datetime import datetime
 import random
+
 
 # Conexão com o banco de dados usando SQLAlchemy
 engine = create_engine('mysql+mysqlconnector://root:root@localhost/techinnovate-solutions')
@@ -87,7 +83,7 @@ print("Erro Médio Quadrático (Random Forest Otimizado):", mse_rf_otimizado)
 print("R2 Score (Random Forest Otimizado):", r2_rf_otimizado)
 
 # Prevendo a demanda futura para um produto específico
-produto_id_desejado = 9
+produto_id_desejado = 11
 
 # Consulta SQL para obter o nome do produto
 consulta_nome_produto = f"SELECT nome FROM produtos WHERE produto_id = {produto_id_desejado}"
@@ -122,36 +118,11 @@ print(f"\nMédia da demanda prevista: {media_demanda_prevista:.2f} unidades por 
 sugestao_estoque = media_demanda_prevista * 7
 print(f"Estoque sugerido para uma semana: {sugestao_estoque:.2f} unidades")
 
-# Crie gráficos para representar padrões e tendências
 
-# Gráfico de dispersão
-sns.scatterplot(x='dia_da_semana', y='quantidade_vendida', data=dados)
-plt.title('Dispersão entre dia da semana e quantidade vendida')
-plt.xlabel('Dia da Semana')
-plt.ylabel('Quantidade Vendida')
-plt.show()
-
-# Identificar padrões
-tendencia = dados['dia_da_semana'].value_counts()
-print("Tendência de vendas por dia da semana:")
-print(tendencia)
-
-# Aplique técnicas como regressão linear, análise de variância, etc.
-
-# Regressão linear
-modelo = OLS(y, X)
-resultados = modelo.fit()
-print("\nRegressão Linear com OLS:")
-print(resultados.summary())
-
-# Modelo de regressão linear
-modelo_reg_linear = LinearRegression()
-modelo_reg_linear.fit(X, y)
-coeficientes = modelo_reg_linear.coef_
-print("\nCoeficientes do modelo de regressão linear:")
-print(coeficientes)
-
-# Compare modelos e abordagens para identificar a mais eficaz
+# /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////          CRIAÇÃO DOS          /////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////            GRAFICOS           /////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Instância do Faker
 fake = Faker()

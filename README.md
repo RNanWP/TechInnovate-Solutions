@@ -1,5 +1,5 @@
 <h1 align="center"> TechInnovate Solutions - Previsão de Demanda e Gerenciamento de Dados </h1>
-Tecnologia da Informação
+<h4 align="center">Tecnologia da Informação</h4>
 
 <h2>Visão Geral do Projeto</h2>
 
