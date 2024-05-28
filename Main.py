@@ -86,8 +86,11 @@ print("Erro Médio Absoluto (Random Forest Otimizado):", mae_rf_otimizado)
 print("Erro Médio Quadrático (Random Forest Otimizado):", mse_rf_otimizado)
 print("R2 Score (Random Forest Otimizado):", r2_rf_otimizado)
 
-# Prevendo a demanda futura para um produto específico
-produto_id_desejado = 9
+# Prevendo a demanda futura para um produto específico                 
+produto_id_desejado = 9                                                           #                                      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                      #/////////////////////////////////////////////          ALTERAR PRODUTO      /////////////////////////////////////////////////////////////
+                                      #/////////////////////////////////////////////            DESEJADO           /////////////////////////////////////////////////////////////
+                                      #/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                      
 
 # Consulta SQL para obter o nome do produto
 consulta_nome_produto = f"SELECT nome FROM produtos WHERE produto_id = {produto_id_desejado}"
@@ -136,8 +139,6 @@ tendencia = dados['dia_da_semana'].value_counts()
 print("Tendência de vendas por dia da semana:")
 print(tendencia)
 
-# Aplique técnicas como regressão linear, análise de variância, etc.
-
 # Regressão linear
 modelo = OLS(y, X)
 resultados = modelo.fit()
@@ -151,7 +152,24 @@ coeficientes = modelo_reg_linear.coef_
 print("\nCoeficientes do modelo de regressão linear:")
 print(coeficientes)
 
-# Compare modelos e abordagens para identificar a mais eficaz
+# Comparando Random Forest com Random Forest Otimizado
+if r2_rf > r2_rf_otimizado:
+    print('Random Forest é melhor.')
+else:
+    print('Random Forest Otimizado é melhor.')
+
+# Comparando Random Forest Otimizado com Regressão Linear
+if r2_rf_otimizado > resultados.rsquared:
+    print('Random Forest Otimizado é melhor que a Regressão Linear.')
+else:
+    print('Regressão Linear é melhor que o Random Forest Otimizado.')
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////          CRIAÇÃO DOS          /////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////            GRAFICOS           /////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 # Instância do Faker
 fake = Faker()
