@@ -1,4 +1,3 @@
-# Importando bibliotecas necessárias
 import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.api import OLS
@@ -125,8 +124,6 @@ print(f"\nMédia da demanda prevista: {media_demanda_prevista:.2f} unidades por 
 sugestao_estoque = media_demanda_prevista * 7
 print(f"Estoque sugerido para uma semana: {sugestao_estoque:.2f} unidades")
 
-# Crie gráficos para representar padrões e tendências
-
 # Gráfico de dispersão
 sns.scatterplot(x='dia_da_semana', y='quantidade_vendida', data=dados)
 plt.title('Dispersão entre dia da semana e quantidade vendida')
@@ -171,7 +168,6 @@ else:
 # /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-# Instância do Faker
 fake = Faker()
 
 
