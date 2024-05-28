@@ -86,5 +86,5 @@ Obrigado por utilizar a solução TechInnovate!
 
 # Autores
 
-| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/37356058?v=4" width=115><br><sub>Camila Fernanda Alves</sub>](https://github.com/RNanWP) |
+| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/111291880?s=400&u=f42178536c3b43cac91e3fb58665566bd58115b7&v=4" width=115><br><sub>Renan Oliveira</sub>](https://github.com/RNanWP) |
 | :---: | :---: | :---: |
