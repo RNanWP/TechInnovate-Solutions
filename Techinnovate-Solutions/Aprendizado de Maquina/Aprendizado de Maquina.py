@@ -1,6 +1,20 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+# Carregando o conjunto de dados
+# Substitua 'seu_arquivo.csv' pelo caminho do seu arquivo de dados
+df = pd.read_csv('seu_arquivo.csv')
+
+# Supondo que a variável de resposta é chamada 'target'
+# e as variáveis preditoras são todas as outras colunas
+X = df.drop('target', axis=1)
+y = df['target']
+
+# Dividindo o conjunto de dados em treinamento e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Treinando o modelo Random Forest
 modelo_rf = RandomForestRegressor(n_estimators=100, random_state=42)
