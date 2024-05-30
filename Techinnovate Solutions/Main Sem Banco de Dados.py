@@ -12,7 +12,6 @@ from faker import Faker
 from tkinter import ttk
 import tkinter as tk
 
-# Configuração inicial
 faker = Faker()
 np.random.seed(42)
 random.seed(42)
@@ -21,18 +20,17 @@ random.seed(42)
 estoque = pd.read_csv('dados/estoque.csv')
 vendas = pd.read_csv('dados/vendas.csv')
 produtos = pd.read_csv('dados/produtos.csv')
+
 # Engenharia de características
 vendas['data_venda'] = pd.to_datetime(vendas['data_venda'])
 vendas['dia_da_semana'] = vendas['data_venda'].dt.dayofweek
 vendas['mes'] = vendas['data_venda'].dt.month
 vendas['ano'] = vendas['data_venda'].dt.year
 
-# Mesclar os dados de estoque e vendas
 dados = pd.merge(estoque, vendas, on='produto_id')
 
 print(dados.columns)
 
-# Ajuste das colunas de características e alvo
 X = dados[['dia_da_semana', 'mes', 'ano', 'quantidade_x']]
 y = dados['quantidade_y']
 
@@ -47,10 +45,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 modelo_rf = RandomForestRegressor(n_estimators=50, max_depth=10, random_state=42)
 modelo_rf.fit(X_train, y_train)
 
-# Fazendo previsões
 rf_y_pred = modelo_rf.predict(X_test)
 
-# Avaliando o modelo
 mae_rf = mean_absolute_error(y_test, rf_y_pred)
 mse_rf = mean_squared_error(y_test, rf_y_pred)
 r2_rf = r2_score(y_test, rf_y_pred)
@@ -87,13 +83,13 @@ print("Erro Médio Absoluto (Random Forest Otimizado):", mae_rf_otimizado)
 print("Erro Médio Quadrático (Random Forest Otimizado):", mse_rf_otimizado)
 print("R2 Score (Random Forest Otimizado):", r2_rf_otimizado)
 
-# Prevendo a demanda futura para um produto específico
-produto_id_desejado = 2  # Alterar conforme necessário
+produto_id_desejado = 2  # Alterar conforme necessário               ///////////////////////////////////////////////////////////////////////////////////////
+                                                                    #///////////////////////////////    ALTERAR PRODUTO     ////////////////////////////////
+                                                                    #///////////////////////////////        DESEJADO        ////////////////////////////////
+                                                                    #///////////////////////////////////////////////////////////////////////////////////////
 
-# Obtendo o nome do produto desejado
 nome_produto_desejado = produtos.loc[produtos['produto_id'] == produto_id_desejado, 'nome'].iloc[0]
 
-# Obtendo a quantidade de estoque atual do produto desejado
 quantidade_em_estoque_atual = dados.loc[dados['produto_id'] == produto_id_desejado, 'quantidade_x'].iloc[0]
 
 # Criando um dataframe para representar o futuro (próximos 7 dias)
@@ -170,7 +166,6 @@ else:
 fake = Faker()
 
 def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
-    # Carregar dados de clientes e produtos dos arquivos CSV
     clientes = pd.read_csv('dados/clientes.csv')
     produtos = pd.read_csv('dados/produtos.csv')
 
@@ -189,12 +184,10 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
         # Adicionar dados do pedido
         pedidos_dados.append((cliente_id, data_pedido, valor_total))
 
-    # Criar DataFrame de pedidos e atualizar o arquivo CSV
     pedidos_df = pd.DataFrame(pedidos_dados, columns=['cliente_id', 'data_pedido', 'valor_total'])
     pedidos_df['pedido_id'] = range(len(pedidos_dados))
     pedidos_df.to_csv('pedidos.csv', mode='a', header=False, index=False)
 
-    # Obter IDs dos pedidos inseridos
     pedidos_inseridos = pd.read_csv('dados/pedidos.csv')
     pedido_ids = pedidos_inseridos['pedido_id'].tail(num_pedidos).tolist()
 
@@ -204,10 +197,8 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
             quantidade = random.randint(1, 10)
             preco_unitario = round(random.uniform(10, 100), 2)
 
-            # Adicionar item do pedido na lista
             itens_pedido_dados.append((pedido_id, produto_id, quantidade, preco_unitario))
 
-    # Criar DataFrame de itens do pedido e atualizar o arquivo CSV
     itens_pedido_df = pd.DataFrame(itens_pedido_dados, columns=['pedido_id', 'produto_id', 'quantidade', 'preco_unitario'])
     itens_pedido_df['item_id'] = range(len(itens_pedido_dados))
     itens_pedido_df.to_csv('dados/itens_pedido.csv', mode='a', header=False, index=False)

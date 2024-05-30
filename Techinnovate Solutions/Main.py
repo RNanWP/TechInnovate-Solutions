@@ -84,9 +84,8 @@ print("Melhores parâmetros encontrados:", best_params)
 print("Erro Médio Absoluto (Random Forest Otimizado):", mae_rf_otimizado)
 print("Erro Médio Quadrático (Random Forest Otimizado):", mse_rf_otimizado)
 print("R2 Score (Random Forest Otimizado):", r2_rf_otimizado)
-
-# Prevendo a demanda futura para um produto específico                 
-produto_id_desejado = 9                                                           #                                      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+               
+produto_id_desejado = 9                                                                       #                                      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                       #/////////////////////////////////////////////          ALTERAR PRODUTO      /////////////////////////////////////////////////////////////
                                       #/////////////////////////////////////////////            DESEJADO           /////////////////////////////////////////////////////////////
                                       #/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                      
@@ -94,15 +93,13 @@ produto_id_desejado = 9                                                         
 # Consulta SQL para obter o nome do produto
 consulta_nome_produto = f"SELECT nome FROM produtos WHERE produto_id = {produto_id_desejado}"
 
-# Carregar o nome do produto
 nome_produto = pd.read_sql_query(consulta_nome_produto, engine)['nome'].iloc[0]
 
-# Obtendo a quantidade de estoque atual do produto desejado
 quantidade_em_estoque_atual = dados.loc[dados['produto_id'] == produto_id_desejado, 'quantidade_em_estoque'].iloc[0]
 
 # Criando um dataframe para representar o futuro (próximos 7 dias)
 futuro = pd.DataFrame({
-    'dia_da_semana': [i % 7 for i in range(1, 8)],  # Considerando os próximos 7 dias
+    'dia_da_semana': [i % 7 for i in range(1, 8)],
     'mes': [6] * 7,
     'ano': [2024] * 7,
     'quantidade_em_estoque': quantidade_em_estoque_atual
@@ -188,10 +185,8 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
         data_pedido = fake.date_between(start_date='-1y', end_date='today')
         valor_total = round(random.uniform(50, 500), 2)
 
-        # Adicionar dados do pedido
         pedidos_dados.append((cliente_id, data_pedido, valor_total))
 
-    # Inserir dados na tabela pedidos e obter os IDs gerados
     with engine.connect() as connection:
         result = connection.execute(
             text("INSERT INTO pedidos (cliente_id, data_pedido, valor_total) VALUES (:cliente_id, :data_pedido, :valor_total)"),
@@ -199,7 +194,6 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
         )
         connection.commit()
 
-        # Obter os IDs dos pedidos inseridos
         pedido_ids = pd.read_sql("SELECT pedido_id FROM pedidos ORDER BY pedido_id DESC LIMIT %s" % num_pedidos, engine)['pedido_id']
 
         for pedido_id in pedido_ids:
@@ -208,10 +202,8 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
                 quantidade = random.randint(1, 10)
                 preco_unitario = round(random.uniform(10, 100), 2)
 
-                # Adicionar item do pedido na lista
                 itens_pedido_dados.append((pedido_id, produto_id, quantidade, preco_unitario))
 
-        # Inserir itens na tabela itens_pedido
         connection.execute(
             text("INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (:pedido_id, :produto_id, :quantidade, :preco_unitario)"),
             [dict(pedido_id=item[0], produto_id=item[1], quantidade=item[2], preco_unitario=item[3]) for item in itens_pedido_dados]
