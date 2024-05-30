@@ -34,7 +34,6 @@ print(dados.columns)
 X = dados[['dia_da_semana', 'mes', 'ano', 'quantidade_x']]
 y = dados['quantidade_y']
 
-# Renomear as colunas para evitar confusão
 X.columns = ['dia_da_semana', 'mes', 'ano', 'quantidade_estoque']
 y.name = 'quantidade_vendida'
 
@@ -108,11 +107,9 @@ print(f"\nPrevisão de demanda futura para o produto '{nome_produto_desejado}' e
 for dia, demanda in zip(futuro['dia_da_semana'], demandas_futuras):
     print(f"Dia da semana {dia}: {demanda:.2f} unidades")
 
-# Calculando a média da demanda prevista
 media_demanda_prevista = demandas_futuras.mean()
 print(f"\nMédia da demanda prevista: {media_demanda_prevista:.2f} unidades por dia")
 
-# Calculando o estoque sugerido para uma semana (supondo uma semana de estoque de segurança)
 sugestao_estoque = media_demanda_prevista * 7
 print(f"Estoque sugerido para uma semana: {sugestao_estoque:.2f} unidades")
 
@@ -123,7 +120,6 @@ plt.xlabel('Dia da Semana')
 plt.ylabel('Quantidade Vendida')
 plt.show()
 
-# Identificar padrões
 tendencia = dados['dia_da_semana'].value_counts().sort_index()
 print("Tendência de vendas por dia da semana:")
 print(tendencia)
