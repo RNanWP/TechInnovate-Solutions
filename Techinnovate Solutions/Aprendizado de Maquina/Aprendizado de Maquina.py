@@ -20,7 +20,6 @@ print("Erro Médio Absoluto (Random Forest):", mae_rf)
 print("Erro Médio Quadrático (Random Forest):", mse_rf)
 print("R2 Score (Random Forest):", r2_rf)
 
-# Otimização do Modelo com RandomizedSearchCV
 param_dist = {
     'n_estimators': [50, 100, 200],
     'max_features': ['sqrt', 'log2'],
@@ -54,7 +53,6 @@ nome_produto_desejado = produtos.loc[produtos['produto_id'] == produto_id_deseja
 
 quantidade_em_estoque_atual = dados.loc[dados['produto_id'] == produto_id_desejado, 'quantidade_x'].iloc[0]
 
-# Criando um dataframe para representar o futuro (próximos 7 dias)
 futuro = pd.DataFrame({
     'dia_da_semana': [i % 7 for i in range(1, 8)],
     'mes': [6] * 7,
@@ -62,41 +60,33 @@ futuro = pd.DataFrame({
     'quantidade_estoque': quantidade_em_estoque_atual
 })
 
-# Realizando previsões para o futuro
 demandas_futuras = modelo_rf_otimizado.predict(futuro[['dia_da_semana', 'mes', 'ano', 'quantidade_estoque']])
 
-# Imprimindo previsões para cada dia
 print(f"\nPrevisão de demanda futura para o produto '{nome_produto_desejado}' em junho de 2024:")
 for dia, demanda in zip(futuro['dia_da_semana'], demandas_futuras):
     print(f"Dia da semana {dia}: {demanda:.2f} unidades")
 
-# Calculando a média da demanda prevista
 media_demanda_prevista = demandas_futuras.mean()
 print(f"\nMédia da demanda prevista: {media_demanda_prevista:.2f} unidades por dia")
 
-# Calculando o estoque sugerido para uma semana (supondo uma semana de estoque de segurança)
 sugestao_estoque = media_demanda_prevista * 7
 print(f"Estoque sugerido para uma semana: {sugestao_estoque:.2f} unidades")
 
-# Gráfico de dispersão
 sns.scatterplot(x='dia_da_semana', y=y_test, data=X_test)
 plt.title('Dispersão entre dia da semana e quantidade vendida')
 plt.xlabel('Dia da Semana')
 plt.ylabel('Quantidade Vendida')
 plt.show()
 
-# Identificar padrões
 tendencia = dados['dia_da_semana'].value_counts().sort_index()
 print("Tendência de vendas por dia da semana:")
 print(tendencia)
 
-# Regressão linear
 modelo = OLS(y, X)
 resultados = modelo.fit()
 print("\nRegressão Linear com OLS:")
 print(resultados.summary())
 
-# Modelo de regressão linear
 modelo_reg_linear = LinearRegression()
 modelo_reg_linear.fit(X, y)
 coeficientes = modelo_reg_linear.coef_
@@ -105,13 +95,11 @@ intercepto = modelo_reg_linear.intercept_
 print("\nCoeficientes da regressão linear:", coeficientes)
 print("Intercepto da regressão linear:", intercepto)
 
-# Comparando Random Forest com Random Forest Otimizado
 if r2_rf > r2_rf_otimizado:
     print('Random Forest é melhor.')
 else:
     print('Random Forest Otimizado é melhor.')
 
-# Comparando Random Forest Otimizado com Regressão Linear
 if r2_rf_otimizado > resultados.rsquared:
     print('Random Forest Otimizado é melhor que a Regressão Linear.')
 else:
