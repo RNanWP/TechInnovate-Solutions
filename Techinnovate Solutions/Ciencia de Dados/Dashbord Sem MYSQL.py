@@ -7,21 +7,17 @@ import plotly.graph_objs as go
 from faker import Faker
 import random
 
-# Função para gerar dados aleatórios de pedidos e itens de pedido
 def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
-    # Aqui você pode implementar a geração de dados aleatórios se necessário
     pass
 
 # Carregar os dados CSV
-clientes = pd.read_csv('dados/clientes.csv')
-produtos = pd.read_csv('dados/produtos.csv')
-pedidos = pd.read_csv('dados/pedidos.csv')
-itens_pedido = pd.read_csv('dados/itens_pedido.csv')
+clientes = pd.read_csv('Techinnovate Solutions/Dados-csv/clientes.csv')
+produtos = pd.read_csv('Techinnovate Solutions/Dados-csv/produtos.csv')
+pedidos = pd.read_csv('Techinnovate Solutions/Dados-csv/pedidos.csv')
+itens_pedido = pd.read_csv('Techinnovate Solutions/Dados-csv/itens_pedido.csv')
 
-# Inicializar o Faker
 fake = Faker()
 
-# Inicializar o aplicativo Dash
 app = dash.Dash(__name__)
 
 # Layout do aplicativo

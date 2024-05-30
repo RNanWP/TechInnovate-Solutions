@@ -17,9 +17,9 @@ np.random.seed(42)
 random.seed(42)
 
 # Carregar os dados gerados
-estoque = pd.read_csv('dados/estoque.csv')
-vendas = pd.read_csv('dados/vendas.csv')
-produtos = pd.read_csv('dados/produtos.csv')
+estoque = pd.read_csv('Techinnovate Solutions/Dados-csv/estoque.csv')
+vendas = pd.read_csv('Techinnovate Solutions/Dados-csv/vendas.csv')
+produtos = pd.read_csv('Techinnovate Solutions/Dados-csv/produtos.csv')
 
 # Engenharia de características
 vendas['data_venda'] = pd.to_datetime(vendas['data_venda'])
@@ -166,8 +166,8 @@ else:
 fake = Faker()
 
 def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
-    clientes = pd.read_csv('dados/clientes.csv')
-    produtos = pd.read_csv('dados/produtos.csv')
+    clientes = pd.read_csv('Techinnovate Solutions/Dados-csv/clientes.csv')
+    produtos = pd.read_csv('Techinnovate Solutions/Dados-csv/produtos.csv')
 
     if clientes.empty or produtos.empty:
         print("Certifique-se de que os arquivos clientes.csv e produtos.csv não estão vazios.")
@@ -188,7 +188,7 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
     pedidos_df['pedido_id'] = range(len(pedidos_dados))
     pedidos_df.to_csv('pedidos.csv', mode='a', header=False, index=False)
 
-    pedidos_inseridos = pd.read_csv('dados/pedidos.csv')
+    pedidos_inseridos = pd.read_csv('Techinnovate Solutions/Dados-csv/pedidos.csv')
     pedido_ids = pedidos_inseridos['pedido_id'].tail(num_pedidos).tolist()
 
     for pedido_id in pedido_ids:
@@ -201,7 +201,7 @@ def gerar_dados_aleatorios(num_pedidos, num_itens_por_pedido):
 
     itens_pedido_df = pd.DataFrame(itens_pedido_dados, columns=['pedido_id', 'produto_id', 'quantidade', 'preco_unitario'])
     itens_pedido_df['item_id'] = range(len(itens_pedido_dados))
-    itens_pedido_df.to_csv('dados/itens_pedido.csv', mode='a', header=False, index=False)
+    itens_pedido_df.to_csv('Techinnovate Solutions/Dados-csv/itens_pedido.csv', mode='a', header=False, index=False)
 
     print("Dados aleatórios gerados e salvos nos arquivos CSV!")
 
@@ -240,25 +240,25 @@ estilo_fonte_btn = ("Helvetica", 12)
 style_btn = ttk.Style()
 style_btn.configure("TButton", font=estilo_fonte_btn, padding=7)
 
-btn_clientes = ttk.Button(root, text="Clientes", command=lambda: exibir_tabela("dados/clientes"))
+btn_clientes = ttk.Button(root, text="Clientes", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/clientes"))
 btn_clientes.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
-btn_estoque = ttk.Button(root, text="Estoque", command=lambda: exibir_tabela("dados/estoque"))
+btn_estoque = ttk.Button(root, text="Estoque", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/estoque"))
 btn_estoque.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
-btn_fornecedores = ttk.Button(root, text="Fornecedores", command=lambda: exibir_tabela("dados/fornecedores"))
+btn_fornecedores = ttk.Button(root, text="Fornecedores", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/fornecedores"))
 btn_fornecedores.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
-btn_produtos = ttk.Button(root, text="Produtos", command=lambda: exibir_tabela("dados/produtos"))
+btn_produtos = ttk.Button(root, text="Produtos", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/produtos"))
 btn_produtos.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
-btn_vendas = ttk.Button(root, text="Vendas", command=lambda: exibir_tabela("dados/vendas"))
+btn_vendas = ttk.Button(root, text="Vendas", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/vendas"))
 btn_vendas.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
-btn_pedidos = ttk.Button(root, text="Pedidos", command=lambda: exibir_tabela("dados/pedidos"))
+btn_pedidos = ttk.Button(root, text="Pedidos", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/pedidos"))
 btn_pedidos.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
-btn_itens_pedido = ttk.Button(root, text="Itens Pedido", command=lambda: exibir_tabela("dados/itens_pedido"))
+btn_itens_pedido = ttk.Button(root, text="Itens Pedido", command=lambda: exibir_tabela("Techinnovate Solutions/Dados-csv/itens_pedido"))
 btn_itens_pedido.pack(pady=5, padx=10, ipadx=10, ipady=5)
 
 # Botão para gerar dados aleatórios
