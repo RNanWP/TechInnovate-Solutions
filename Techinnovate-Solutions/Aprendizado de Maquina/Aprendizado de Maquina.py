@@ -5,11 +5,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # Carregando o conjunto de dados
-# Substitua 'seu_arquivo.csv' pelo caminho do seu arquivo de dados
 df = pd.read_csv('seu_arquivo.csv')
 
-# Supondo que a variável de resposta é chamada 'target'
-# e as variáveis preditoras são todas as outras colunas
 X = df.drop('target', axis=1)
 y = df['target']
 
